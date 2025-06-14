@@ -7,15 +7,15 @@ param($Request, $TriggerMetadata)
 Write-Host "PowerShell HTTP trigger function processed a request."
 
 # Interact with query parameters or the body of the request.
-$name = $Request.Query.Name
-if (-not $name) {
-    $name = $Request.Body.Name
+$format = $Request.Query.Format
+if (-not $format) {
+    $format = $Request.Body.Format
 }
 
-$body = "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+$body = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
-if ($name) {
-    $body = "Hello, $name. This HTTP triggered function executed successfully."
+if ($format) {
+    $body = Get-Date -Format $format
 }
 
 # Associate values to output bindings by calling 'Push-OutputBinding'.
